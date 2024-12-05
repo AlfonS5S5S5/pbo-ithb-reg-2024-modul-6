@@ -99,6 +99,7 @@ public class DBController {
     }
     public static boolean updateData(KTP ktp) {
         String query = "UPDATE ktp SET nama=?, tempat_lahir=?, tanggal_lahir=?, jenis_kelamin=?, gol_darah=?, alamat=?, rt=?, rw=?, keldesa=?, kecamatan=?, agama=?, status_perkawinan=?, pekerjaan=?, kewarganegaraan=?, negara_asal=?, photo_path=?, signature_path=?, berlaku_hingga=?, kota_pembuatan=?, tanggal_pembuatan=? WHERE NIK=?";
+        
         try {
             con.connect();
             PreparedStatement statement = con.con.prepareStatement(query);
