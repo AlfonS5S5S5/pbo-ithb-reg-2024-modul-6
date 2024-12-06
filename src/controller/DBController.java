@@ -13,17 +13,24 @@ import model.enummm.StatusPerkawinan;
 
 public class DBController {
     
-    static DatabaseHandler con = new DatabaseHandler();
+    static DatabaseHandler conn = new DatabaseHandler();
 
+    // SEARCH/GET KTP
     public static KTP getKTP(String nik) {
+
         KTP ktp = new KTP();
+
         try {
-            con.connect();
-            String query = "SELECT * FROM ktpp WHERE NIK='" + nik + "'";
-            Statement statement = con.con.createStatement();
-            ResultSet rs = statement.executeQuery(query);
+
+            conn.connect();
+            String query = "SELECT * FROM ktp WHERE NIK='" + nik + "'";
+            Statement stmt = conn.con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            
             if (rs.next()) {
+                
                 do {
+                    
                     ktp.setNik(rs.getString("NIK"));
                     ktp.setNama(rs.getString("nama"));
                     ktp.setTempatLahir(rs.getString("tempat_lahir"));
@@ -45,112 +52,158 @@ public class DBController {
                     ktp.setBerlakuHingga(rs.getString("berlaku_hingga"));
                     ktp.setKotaPembuatan(rs.getString("kota_pembuatan"));
                     ktp.setTanggalPembuatan(rs.getString("tanggal_pembuatan"));
+
                 } while (rs.next());
+
             }
             else {
+
                 return null;
+
             }
-        }
+
+        } 
         catch (SQLException e) {
+
             e.printStackTrace();
-        }
-        con.disconnect();
+
+        } 
+
+        conn.disconnect();
         return ktp;
 
     }
 
+    // INSERT
     public static boolean insertNewUser(KTP ktp) {
-        String query = "INSERT INTO ktpp (nik, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, gol_darah, alamat, rt, rw, keldesa, kecamatan, agama, status_perkawinan, pekerjaan, kewarganegaraan, negara_asal, photo_path, signature_path, berlaku_hingga, kota_pembuatan, tanggal_pembuatan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try {
-            con.connect();
-            PreparedStatement statement = con.con.prepareStatement(query);
-            statement.setString(1, ktp.getNik());
-            statement.setString(2, ktp.getNama());
-            statement.setString(3, ktp.getTempatLahir());
-            statement.setString(4, ktp.getTanggalLahir());
-            statement.setString(5, ktp.getJenisKelamin().name());
-            statement.setString(6, ktp.getGolDarah());
-            statement.setString(7, ktp.getAlamat());
-            statement.setString(8, ktp.getRt());
-            statement.setString(9, ktp.getRw());
-            statement.setString(10, ktp.getKelDesa());
-            statement.setString(11, ktp.getKecamatan());
-            statement.setString(12, ktp.getAgama().name());
-            statement.setString(13, ktp.getStatusPerkawinan().name());
-            statement.setString(14, ktp.getPekerjaan());
-            statement.setString(15, ktp.getKewarganegaraan());
-            statement.setString(16, ktp.getWargaNegaraAsal());
-            statement.setString(17, ktp.getFotoFilePath().getPath());
-            statement.setString(18, ktp.getTandaTanganFilePath().getPath());
-            statement.setString(19, ktp.getBerlakuHingga());
-            statement.setString(20, ktp.getKotaPembuatan());
-            statement.setString(21, ktp.getTanggalPembuatan());
 
-            statement.executeUpdate();
+        String query = "INSERT INTO ktp (nik, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, gol_darah, alamat, rt, rw, keldesa, kecamatan, agama, status_perkawinan, pekerjaan, kewarganegaraan, negara_asal, photo_path, signature_path, berlaku_hingga, kota_pembuatan, tanggal_pembuatan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+
+            conn.connect();
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            
+            stmt.setString(1, ktp.getNik());
+            stmt.setString(2, ktp.getNama());
+            stmt.setString(3, ktp.getTempatLahir());
+            stmt.setString(4, ktp.getTanggalLahir());
+            stmt.setString(5, ktp.getJenisKelamin().name());
+            stmt.setString(6, ktp.getGolDarah());
+            stmt.setString(7, ktp.getAlamat());
+            stmt.setString(8, ktp.getRt());
+            stmt.setString(9, ktp.getRw());
+            stmt.setString(10, ktp.getKelDesa());
+            stmt.setString(11, ktp.getKecamatan());
+            stmt.setString(12, ktp.getAgama().name());
+            stmt.setString(13, ktp.getStatusPerkawinan().name());
+            stmt.setString(14, ktp.getPekerjaan());
+            stmt.setString(15, ktp.getKewarganegaraan());
+            stmt.setString(16, ktp.getWargaNegaraAsal());
+            stmt.setString(17, ktp.getFotoFilePath().getPath());
+            stmt.setString(18, ktp.getTandaTanganFilePath().getPath());
+            stmt.setString(19, ktp.getBerlakuHingga());
+            stmt.setString(20, ktp.getKotaPembuatan());
+            stmt.setString(21, ktp.getTanggalPembuatan());
+
+            stmt.executeUpdate();
             return true;
-        }
+
+        } 
         catch (SQLException e) {
+            
             e.printStackTrace();
             return false;
-        }
+
+        } 
         finally {
-            con.disconnect();
+
+            conn.disconnect();
+
         }
-    }
-    public static boolean updateData(KTP ktp) {
-        String query = "UPDATE ktpp SET nama=?, tempat_lahir=?, tanggal_lahir=?, jenis_kelamin=?, gol_darah=?, alamat=?, rt=?, rw=?, keldesa=?, kecamatan=?, agama=?, status_perkawinan=?, pekerjaan=?, kewarganegaraan=?, negara_asal=?, photo_path=?, signature_path=?, berlaku_hingga=?, kota_pembuatan=?, tanggal_pembuatan=? WHERE NIK=?";
-        
-        try {
-            con.connect();
-            PreparedStatement statement = con.con.prepareStatement(query);
-            statement.setString(1, ktp.getNama());
-            statement.setString(2, ktp.getTempatLahir());
-            statement.setString(3, ktp.getTanggalLahir());
-            statement.setString(4, ktp.getJenisKelamin().name());
-            statement.setString(5, ktp.getGolDarah());
-            statement.setString(6, ktp.getAlamat());
-            statement.setString(7, ktp.getRt());
-            statement.setString(8, ktp.getRw());
-            statement.setString(9, ktp.getKelDesa());
-            statement.setString(10, ktp.getKecamatan());
-            statement.setString(11, ktp.getAgama().name());
-            statement.setString(12, ktp.getStatusPerkawinan().name());
-            statement.setString(13, ktp.getPekerjaan());
-            statement.setString(14, ktp.getKewarganegaraan());
-            statement.setString(15, ktp.getWargaNegaraAsal());
-            statement.setString(16, ktp.getFotoFilePath().getPath());
-            statement.setString(17, ktp.getTandaTanganFilePath().getPath());
-            statement.setString(18, ktp.getBerlakuHingga());
-            statement.setString(19, ktp.getKotaPembuatan());
-            statement.setString(20, ktp.getTanggalPembuatan());
-            statement.setString(21, ktp.getNik());
-            int rowsUpdated = statement.executeUpdate();
-            return rowsUpdated > 0;
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-        finally {
-            con.disconnect();
-        }
+
     }
 
-    public static boolean deleteData(String nik) {
-        String query = "DELETE FROM ktpp WHERE NIK=?";
+    // UPDATE
+    public static boolean updateData(KTP ktp) {
+
+        String query = "UPDATE ktp SET nama=?, tempat_lahir=?, tanggal_lahir=?, jenis_kelamin=?, gol_darah=?, alamat=?, rt=?, rw=?, keldesa=?, kecamatan=?, agama=?, status_perkawinan=?, pekerjaan=?, kewarganegaraan=?, negara_asal=?, photo_path=?, signature_path=?, berlaku_hingga=?, kota_pembuatan=?, tanggal_pembuatan=? WHERE NIK=?";
+
         try {
-            con.connect();
-            PreparedStatement statement = con.con.prepareStatement(query);
-            statement.setString(1, nik);
-            int rowsDeleted = statement.executeUpdate();
-            return rowsDeleted > 0;
-        }
+
+            conn.connect();
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            
+            stmt.setString(1, ktp.getNama());
+            stmt.setString(2, ktp.getTempatLahir());
+            stmt.setString(3, ktp.getTanggalLahir());
+            stmt.setString(4, ktp.getJenisKelamin().name());
+            stmt.setString(5, ktp.getGolDarah());
+            stmt.setString(6, ktp.getAlamat());
+            stmt.setString(7, ktp.getRt());
+            stmt.setString(8, ktp.getRw());
+            stmt.setString(9, ktp.getKelDesa());
+            stmt.setString(10, ktp.getKecamatan());
+            stmt.setString(11, ktp.getAgama().name());
+            stmt.setString(12, ktp.getStatusPerkawinan().name());
+            stmt.setString(13, ktp.getPekerjaan());
+            stmt.setString(14, ktp.getKewarganegaraan());
+            stmt.setString(15, ktp.getWargaNegaraAsal());
+            stmt.setString(16, ktp.getFotoFilePath().getPath());
+            stmt.setString(17, ktp.getTandaTanganFilePath().getPath());
+            stmt.setString(18, ktp.getBerlakuHingga());
+            stmt.setString(19, ktp.getKotaPembuatan());
+            stmt.setString(20, ktp.getTanggalPembuatan());
+            
+            // Where clause
+            stmt.setString(21, ktp.getNik());
+
+            int rowsUpdated = stmt.executeUpdate();
+            return rowsUpdated > 0;
+
+        } 
         catch (SQLException e) {
+
             e.printStackTrace();
             return false;
-        }
+
+        } 
         finally {
-            con.disconnect();
+
+            conn.disconnect();
+
         }
+
     }
+
+    // DELETE
+    public static boolean deleteData(String nik) {
+
+        String query = "DELETE FROM ktp WHERE NIK=?";
+
+        try {
+
+            conn.connect();
+            PreparedStatement stmt = conn.con.prepareStatement(query);
+            
+            stmt.setString(1, nik);
+
+            int rowsDeleted = stmt.executeUpdate();
+            return rowsDeleted > 0;
+
+        } 
+        catch (SQLException e) {
+
+            e.printStackTrace();
+            return false;
+
+        } 
+        finally {
+
+            conn.disconnect();
+
+        }
+
+    }
+
 }

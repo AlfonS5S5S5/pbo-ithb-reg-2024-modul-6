@@ -16,25 +16,25 @@ import controller.DBController;
 public class pencarianForm {
     
     public pencarianForm() {
-        search();
+        showSearchForm();
     }
 
-    public void search() {
+    public void showSearchForm() {
 
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
+        Toolkit toolkit = Toolkit.getDefaultToolkit(); // INIT TOOLKIT
+        Dimension screenSize = toolkit.getScreenSize(); // GET MY SCREEN SIZE
 
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width; // GET PIXELS FOR WIDTH
+        int screenHeight = screenSize.height; // GET PIXELS FOR HEIGHT
 
-        final int FRAME_WIDTH = 400;
-        final int FRAME_HEIGHT = 150;
+        final int FRAME_WIDTH = 400; // SET WIDTH
+        final int FRAME_HEIGHT = 150; // SET WEIGHT
 
-        int start_x = screenWidth / 2 - (FRAME_WIDTH / 2);
-        int start_y = screenHeight / 2 - (FRAME_HEIGHT / 2);
+        int start_x = screenWidth / 2 - (FRAME_WIDTH / 2); // SET START LOCATION FOR X
+        int start_y = screenHeight / 2 - (FRAME_HEIGHT / 2); // SET START LOCATION FOR Y
         
         JFrame frame = new JFrame("Cetak KTP");
-        frame.setBounds(start_x, start_y, FRAME_WIDTH, FRAME_HEIGHT);
+        frame.setBounds(start_x, start_y, FRAME_WIDTH, FRAME_HEIGHT); // SET FRAME BOUND
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel();

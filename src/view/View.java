@@ -130,6 +130,7 @@ public class View {
         JRadioButton bRadio = new JRadioButton("B");
         JRadioButton oRadio = new JRadioButton("O");
         JRadioButton abRadio = new JRadioButton("AB");
+
         aRadio.setBounds(leftX + leftWidth, 300, 50, 30);
         bRadio.setBounds(leftX + leftWidth + 60, 300, 50, 30);
         oRadio.setBounds(leftX + leftWidth + 120, 300, 50, 30);
@@ -139,6 +140,12 @@ public class View {
         golDarahGroup.add(bRadio);
         golDarahGroup.add(oRadio);
         golDarahGroup.add(abRadio);
+
+        aRadio.setActionCommand("A");
+        bRadio.setActionCommand("B");
+        oRadio.setActionCommand("O");
+        abRadio.setActionCommand("AB");
+
         panelKTP.add(aRadio);
         panelKTP.add(bRadio);
         panelKTP.add(oRadio);
@@ -381,11 +388,11 @@ public class View {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (controller.checkInput(nikField, namaField, tempatLahirField, genderGroup, golDarahGroup,
-                        alamatField, rtField, rwField, kelurahanField, kecamatanField, agamaComboBox, perkawinanBox,
-                        karyawanSwastaCheck, pnsCheck, wiraswastaCheck, akademisiCheck, pengangguranCheck,
-                        citizenshipGroup, citizenshipField, photoFile, signatureFile, tglBerlakuField,
-                        kotaPembuatanField)) {
+                if (controller.checkInput(nikField, namaField, tempatLahirField, datePicker, genderGroup, golDarahGroup,
+                    alamatField, rtField, rwField, kelurahanField, kecamatanField, agamaComboBox, perkawinanBox,
+                    karyawanSwastaCheck, pnsCheck, wiraswastaCheck, akademisiCheck, pengangguranCheck,
+                    citizenshipGroup, citizenshipField, photoFile, signatureFile, tglBerlakuField,
+                    kotaPembuatanField, tglBuatPicker)) {
 
                     String nik = nikField.getText();
                     String nama = namaField.getText();
@@ -423,7 +430,7 @@ public class View {
                     
                     myFrame.dispose();
 
-                    new outputKTP(ktp);
+                    new PrintKTP(ktp);
                 }
                 else {
                     JOptionPane.showMessageDialog(myFrame, "Semua field harus diisi", "Error",
@@ -431,6 +438,7 @@ public class View {
                 }
             }
         });
+
         JButton updateButton = new JButton("UPDATE");
         updateButton.setBounds(950, 660, 200, 30);
         panelKTP.add(updateButton);
@@ -478,7 +486,7 @@ public class View {
 
                 JOptionPane.showMessageDialog(myFrame, "Berhasil edit data!", "Notifikasi", JOptionPane.INFORMATION_MESSAGE);
 
-                new outputKTP(ktp);
+                new PrintKTP(ktp);
 
             }
 

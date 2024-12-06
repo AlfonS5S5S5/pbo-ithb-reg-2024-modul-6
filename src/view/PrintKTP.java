@@ -1,38 +1,41 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import model.classessss.KTP;
 
-public class outputKTP {
+public class PrintKTP {
 
     private JFrame frame;
 
-    public outputKTP(KTP ktp) {
+    public PrintKTP(KTP ktp) {
         showKTP(ktp);
     }
 
     public void showKTP(KTP ktp) {
 
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Dimension screenSize = toolkit.getScreenSize();
+        Toolkit toolkit = Toolkit.getDefaultToolkit(); // INIT TOOLKIT
+        Dimension screenSize = toolkit.getScreenSize(); // GET MY SCREEN SIZE
 
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
+        int screenWidth = screenSize.width; // GET PIXELS FOR WIDTH
+        int screenHeight = screenSize.height; // GET PIXELS FOR HEIGHT
 
-        final int FRAME_WIDTH = 1000;
-        final int FRAME_HEIGHT = 600;
+        final int FRAME_WIDTH = 1000; // SET WIDTH
+        final int FRAME_HEIGHT = 600; // SET WEIGHT
 
-        int start_x = screenWidth / 2 - (FRAME_WIDTH / 2);
-        int start_y = screenHeight / 2 - (FRAME_HEIGHT / 2);
+        int start_x = screenWidth / 2 - (FRAME_WIDTH / 2); // SET START LOCATION FOR X
+        int start_y = screenHeight / 2 - (FRAME_HEIGHT / 2); // SET START LOCATION FOR Y
         
         frame = new JFrame("Cetak KTP");
-        frame.setBounds(start_x, start_y, FRAME_WIDTH, FRAME_HEIGHT);
+        frame.setBounds(start_x, start_y, FRAME_WIDTH, FRAME_HEIGHT); // SET FRAME BOUND
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel();
@@ -41,7 +44,8 @@ public class outputKTP {
 
         JLabel titleLabel = new JLabel("REPUBLIK HARAPAN BANGSA");
         titleLabel.setBounds(350, 15, 300, 50);
-        panel.add(titleLabel);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 20)); // CHANGE FONT
+        panel.add(titleLabel); // ADD LABEL TO PANEL
 
         addLabelBold(panel, "NIK", 50, 80, 50, 50);
         addLabelBold(panel, ": " + ktp.getNik(), 280, 80, 300, 50);
@@ -89,6 +93,7 @@ public class outputKTP {
 
         backMainMenu.addActionListener(e -> {
             frame.dispose();
+            new mainMenu();
         });
 
         frame.add(panel);
@@ -96,14 +101,18 @@ public class outputKTP {
 
     }
 
+
+
     private void addLabelAndValue(JPanel panel, String label, String value, int x, int y) {
 
         JLabel jLabel = new JLabel(label);
         jLabel.setBounds(x, y, 200, 25);
+        jLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
         panel.add(jLabel);
 
         JLabel jValue = new JLabel(" : " + value);
         jValue.setBounds(x + 250, y, 300, 20);
+        jValue.setFont(new Font("SansSerif", Font.PLAIN, 18));
         panel.add(jValue);
 
     }
@@ -112,6 +121,7 @@ public class outputKTP {
 
         JLabel myLabel = new JLabel(label);
         myLabel.setBounds(x, y, width, height);
+        myLabel.setFont(new Font("SansSerif", Font.BOLD, 24));
         panel.add(myLabel);
 
     }
@@ -120,6 +130,7 @@ public class outputKTP {
 
         JLabel myLabel = new JLabel(label);
         myLabel.setBounds(x, y, width, height);
+        myLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
         panel.add(myLabel);
 
     }
