@@ -40,7 +40,7 @@ public class mainMenu {
         panel.setLayout(null);
         panel.setBounds(0, 0, FRAME_WIDTH, FRAME_HEIGHT);
 
-        JLabel title = new JLabel("PEREKAMAN DATA");
+        JLabel title = new JLabel("Input Data");
         title.setBounds(30, 10, 300, 50);
         title.setFont(new Font("SansSerif", Font.BOLD, 24));
         panel.add(title);
@@ -50,7 +50,7 @@ public class mainMenu {
         title2.setFont(new Font("SansSerif", Font.BOLD, 24));
         panel.add(title2);
 
-        JButton perekamanBtn = new JButton("PEREKAMAN");
+        JButton perekamanBtn = new JButton("Input Data");
         perekamanBtn.setBounds(10, 130, 260, 50);
         panel.add(perekamanBtn);
 
@@ -59,7 +59,7 @@ public class mainMenu {
             new View(1, null);
         });
 
-        JButton pencarianBtn = new JButton("PENCARIAN");
+        JButton pencarianBtn = new JButton("Search Data");
         pencarianBtn.setBounds(10, 200, 260, 50);
         panel.add(pencarianBtn);
 
