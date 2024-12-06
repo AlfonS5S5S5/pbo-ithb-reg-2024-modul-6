@@ -18,48 +18,65 @@ import model.enummm.StatusPerkawinan;
 public class controller {
 
     public static boolean checkInput(
-            JTextField nikField, JTextField namaField, JTextField tempatLahirField,
-            ButtonGroup genderGroup, ButtonGroup bloodGroup, JTextField alamatField, JTextField rtField,
-            JTextField rwField, JTextField kelurahanField, JTextField kecamatanField, JComboBox<String> agamaComboBox,
-            JComboBox<String> perkawinanBox, JCheckBox karyawanSwastaCheck, JCheckBox pnsCheck,
-            JCheckBox wiraswastaCheck, JCheckBox akademisiCheck, JCheckBox pengangguranCheck,
-            ButtonGroup citizenshipGroup, JTextField citizenshipField, File photoFile, File signatureFile,
-            JTextField tglBerlakuField, JTextField kotaPembuatanField) {
+        JTextField nikField, JTextField namaField, JTextField tempatLahirField,
+        ButtonGroup genderGroup, ButtonGroup golDarahGroup, JTextField alamatField, JTextField rtField,
+        JTextField rwField, JTextField kelurahanField, JTextField kecamatanField, JComboBox<String> agamaComboBox,
+        JComboBox<String> perkawinanBox, JCheckBox karyawanSwastaCheck, JCheckBox pnsCheck,
+        JCheckBox wiraswastaCheck, JCheckBox akademisiCheck, JCheckBox pengangguranCheck,
+        ButtonGroup citizenshipGroup, JTextField citizenshipField, File photoFile, File signatureFile,
+        JTextField tglBerlakuField, JTextField kotaPembuatanField) {
 
         if (nikField.getText().trim().isEmpty()
                 || namaField.getText().trim().isEmpty()
                 || tempatLahirField.getText().trim().isEmpty()
-                || genderGroup.getSelection() == null
-                || bloodGroup.getSelection() == null
                 || alamatField.getText().trim().isEmpty()
                 || rtField.getText().trim().isEmpty()
                 || rwField.getText().trim().isEmpty()
                 || kelurahanField.getText().trim().isEmpty()
                 || kecamatanField.getText().trim().isEmpty()
-                || agamaComboBox.getSelectedIndex() == -1
-                || perkawinanBox.getSelectedIndex() == -1
-                || (!karyawanSwastaCheck.isSelected()
-                        && !pnsCheck.isSelected()
-                        && !wiraswastaCheck.isSelected()
-                        && !akademisiCheck.isSelected()
-                        && !pengangguranCheck.isSelected())
-                || citizenshipGroup.getSelection() == null
-                || (citizenshipGroup.getSelection().getActionCommand().equals("WNA")
-                        && citizenshipField.getText().trim().isEmpty())
-                || photoFile == null
-                || signatureFile == null
                 || tglBerlakuField.getText().trim().isEmpty()
                 || kotaPembuatanField.getText().trim().isEmpty()) {
 
             return false;
-
-        } else {
-
-            return true;
-
         }
 
+        if (agamaComboBox.getSelectedIndex() == -1 || perkawinanBox.getSelectedIndex() == -1) {
+            return false;
+        }
+
+        if (genderGroup.getSelection() == null) {
+            return false;
+        }
+
+        if (golDarahGroup.getSelection() == null) {
+            return false;
+        }
+
+        if (!karyawanSwastaCheck.isSelected()
+                && !pnsCheck.isSelected()
+                && !wiraswastaCheck.isSelected()
+                && !akademisiCheck.isSelected()
+                && !pengangguranCheck.isSelected()) {
+
+            return false;
+        }
+
+        if (citizenshipGroup.getSelection() == null) {
+            return false;
+        }
+
+        if (citizenshipGroup.getSelection().getActionCommand().equals("WNA")
+                && (citizenshipField == null || citizenshipField.getText().trim().isEmpty())) {
+
+            return false;
+        }
+
+        if (photoFile == null || signatureFile == null) {
+            return false;
+        }
+        return true;
     }
+
 
     public static void resetFields(JTextField nikField, JTextField namaField, JTextField tempatLahirField,
              ButtonGroup genderGroup, ButtonGroup bloodGroup, JTextField alamatField,

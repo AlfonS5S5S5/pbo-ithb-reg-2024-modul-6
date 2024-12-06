@@ -19,7 +19,7 @@ public class DBController {
         KTP ktp = new KTP();
         try {
             con.connect();
-            String query = "SELECT * FROM ktp WHERE NIK='" + nik + "'";
+            String query = "SELECT * FROM ktpp WHERE NIK='" + nik + "'";
             Statement statement = con.con.createStatement();
             ResultSet rs = statement.executeQuery(query);
             if (rs.next()) {
@@ -60,7 +60,7 @@ public class DBController {
     }
 
     public static boolean insertNewUser(KTP ktp) {
-        String query = "INSERT INTO ktp (nik, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, gol_darah, alamat, rt, rw, keldesa, kecamatan, agama, status_perkawinan, pekerjaan, kewarganegaraan, negara_asal, photo_path, signature_path, berlaku_hingga, kota_pembuatan, tanggal_pembuatan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO ktpp (nik, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, gol_darah, alamat, rt, rw, keldesa, kecamatan, agama, status_perkawinan, pekerjaan, kewarganegaraan, negara_asal, photo_path, signature_path, berlaku_hingga, kota_pembuatan, tanggal_pembuatan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             con.connect();
             PreparedStatement statement = con.con.prepareStatement(query);
@@ -98,7 +98,7 @@ public class DBController {
         }
     }
     public static boolean updateData(KTP ktp) {
-        String query = "UPDATE ktp SET nama=?, tempat_lahir=?, tanggal_lahir=?, jenis_kelamin=?, gol_darah=?, alamat=?, rt=?, rw=?, keldesa=?, kecamatan=?, agama=?, status_perkawinan=?, pekerjaan=?, kewarganegaraan=?, negara_asal=?, photo_path=?, signature_path=?, berlaku_hingga=?, kota_pembuatan=?, tanggal_pembuatan=? WHERE NIK=?";
+        String query = "UPDATE ktpp SET nama=?, tempat_lahir=?, tanggal_lahir=?, jenis_kelamin=?, gol_darah=?, alamat=?, rt=?, rw=?, keldesa=?, kecamatan=?, agama=?, status_perkawinan=?, pekerjaan=?, kewarganegaraan=?, negara_asal=?, photo_path=?, signature_path=?, berlaku_hingga=?, kota_pembuatan=?, tanggal_pembuatan=? WHERE NIK=?";
         
         try {
             con.connect();
@@ -137,7 +137,7 @@ public class DBController {
     }
 
     public static boolean deleteData(String nik) {
-        String query = "DELETE FROM ktp WHERE NIK=?";
+        String query = "DELETE FROM ktpp WHERE NIK=?";
         try {
             con.connect();
             PreparedStatement statement = con.con.prepareStatement(query);

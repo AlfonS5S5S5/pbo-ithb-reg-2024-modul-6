@@ -6,10 +6,10 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.swing.ButtonGroup;
@@ -265,7 +265,10 @@ public class View {
         panelKTP.add(citizenshipLabel);
 
         JRadioButton rWNI = new JRadioButton("WNI");
+        rWNI.setActionCommand("WNI");
+
         JRadioButton rWNA = new JRadioButton("WNA");
+        rWNA.setActionCommand("WNA");
 
         rWNI.setBounds(rightX + rightWidth, 280, 100, 30);
         rWNA.setBounds(rightX + rightWidth + 120, 280, 100, 30);
